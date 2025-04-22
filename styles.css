@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Navbar */
+#navbar {
+    background-color: #f1f1f1;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 60px; /* Sabit yükseklik */
+    display: flex;
+    align-items: center; /* İçindekileri dikeyde ortala */
+    justify-content: center; /* Menü ortalanacak */
+}
+
+/* Hamburger Menüsü */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 25px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    background-color: #333;
+    height: 4px;
+    width: 100%;
+}
+
+/* Menü */
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap; /* Alt satıra geçmesin */
+}
+
+/* Menü Öğeleri */
+.menu li {
+    position: relative;
+    margin: 0 12px; /* Elemanlar arası boşluk */
+    display: flex; /* li içinde de flex */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Menü Linkleri */
+.menu li a {
+    text-decoration: none;
+    color: rgb(121, 121, 121);
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 8px; /* Hafif padding */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 60px; /* Link yüksekliği */
+    line-height: 40px; /* Yazı dikeyde tam ortalı */
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+/* Hover efekti */
+.menu li a:hover {
+    background-color: white;
+}
+
+/* Alt Menü (Dropdown) */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%; /* li'nin hemen altına */
+    left: 0;
+    background-color: #fff;
+    list-style: none;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    min-width: 180px;
+}
+
+.menu li:hover .submenu {
+    display: block;
+}
+
+/* Alt Menü Linkleri */
+.submenu li a {
+    padding: 10px 15px;
+    display: block;
+    font-size: 13px;
+    color: rgb(121, 121, 121);
+    background-color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.submenu li a:hover {
+    background-color: #ff5e00;
+    color: #fff;
+}
+
+/* Quick Links Alanı */
+.quick-links {
+    padding: 40px 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.quick-links h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.quick-links-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 öğe aynı satırda olacak şekilde ayarlandı */
+    gap: 20px;
+    justify-items: center; /* Her öğeyi ortalar */
+    overflow-x: auto; /* Eğer ekran dar olursa yatay kaydırma sağlanacak */
+}
+
+.quick-card {
+    padding: 0;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.quick-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Kart Hover Efekti */
+.quick-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Mobil Cihazlar İçin Ayarlar */
+@media (max-width: 768px) {
+    .quick-links-container {
+        grid-template-columns: repeat(5, 1fr); /* Küçük ekranlarda 5 öğe aynı satırda */
+    }
+}
+
+/* Mobil Cihazlar İçin Ayarlar */
+@media (max-width: 768px) {
+    /* Hamburger Menüsü Göster */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Menü Öğeleri Mobilde gizli olacak */
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #f1f1f1;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 10px;
+    }
+
+    /* Menü açıldığında alt menülerin görünmesi */
+    .menu.open {
+        display: flex;
+    }
+
+    /* Alt menüler mobilde gizli */
+    .submenu {
+        display: none;
+    }
+
+    /* Menü öğesinin hover olayı */
+    .menu li:hover .submenu {
+        display: block;
+    }
+}
