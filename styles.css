@@ -1,3 +1,4 @@
+/* Genel Ayarlar */
 * {
     margin: 0;
     padding: 0;
@@ -15,13 +16,13 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    height: 60px; /* Sabit yükseklik */
+    height: 60px;
     display: flex;
-    align-items: center; /* İçindekileri dikeyde ortala */
-    justify-content: center; /* Menü ortalanacak */
+    align-items: center;
+    justify-content: center;
 }
 
-/* Hamburger Menüsü */
+/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -42,45 +43,37 @@ body {
     list-style: none;
     display: flex;
     align-items: center;
-    flex-wrap: nowrap; /* Alt satıra geçmesin */
 }
 
-/* Menü Öğeleri */
 .menu li {
     position: relative;
-    margin: 0 12px; /* Elemanlar arası boşluk */
-    display: flex; /* li içinde de flex */
+    margin: 0 12px;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Menü Linkleri */
 .menu li a {
     text-decoration: none;
     color: rgb(121, 121, 121);
     font-size: 13px;
     font-weight: bold;
-    padding: 10px 8px; /* Hafif padding */
+    padding: 10px 8px;
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 60px; /* Link yüksekliği */
-    line-height: 40px; /* Yazı dikeyde tam ortalı */
+    height: 60px;
+    line-height: 40px;
     transition: background-color 0.3s ease;
     border-radius: 4px;
 }
 
-/* Hover efekti */
 .menu li a:hover {
     background-color: white;
 }
 
-/* Alt Menü (Dropdown) */
 .submenu {
     display: none;
     position: absolute;
-    top: 100%; /* li'nin hemen altına */
+    top: 100%;
     left: 0;
     background-color: #fff;
     list-style: none;
@@ -93,7 +86,6 @@ body {
     display: block;
 }
 
-/* Alt Menü Linkleri */
 .submenu li a {
     padding: 10px 15px;
     display: block;
@@ -108,7 +100,44 @@ body {
     color: #fff;
 }
 
-/* Quick Links Alanı */
+/* Main Slider */
+.main-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+}
+
+.slider-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-container img {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.slider-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.slider-buttons button {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+/* Quick Links */
 .quick-links {
     padding: 40px 20px;
     background-color: white;
@@ -123,10 +152,10 @@ body {
 
 .quick-links-container {
     display: grid;
-    grid-template-columns: repeat(10, 1fr); /* 10 öğe aynı satırda olacak şekilde ayarlandı */
+    grid-template-columns: repeat(10, 1fr);
     gap: 20px;
-    justify-items: center; /* Her öğeyi ortalar */
-    overflow-x: auto; /* Eğer ekran dar olursa yatay kaydırma sağlanacak */
+    justify-items: center;
+    overflow-x: auto;
 }
 
 .quick-card {
@@ -144,26 +173,20 @@ body {
     border-radius: 8px;
 }
 
-/* Kart Hover Efekti */
 .quick-card:hover {
     transform: translateY(-5px);
 }
 
-/* Mobil Cihazlar İçin Ayarlar */
+/* Mobil Uyum */
 @media (max-width: 768px) {
     .quick-links-container {
-        grid-template-columns: repeat(5, 1fr); /* Küçük ekranlarda 5 öğe aynı satırda */
+        grid-template-columns: repeat(5, 1fr);
     }
-}
 
-/* Mobil Cihazlar İçin Ayarlar */
-@media (max-width: 768px) {
-    /* Hamburger Menüsü Göster */
     .hamburger {
         display: flex;
     }
 
-    /* Menü Öğeleri Mobilde gizli olacak */
     .menu {
         display: none;
         flex-direction: column;
@@ -175,17 +198,14 @@ body {
         padding: 10px;
     }
 
-    /* Menü açıldığında alt menülerin görünmesi */
     .menu.open {
         display: flex;
     }
 
-    /* Alt menüler mobilde gizli */
     .submenu {
         display: none;
     }
 
-    /* Menü öğesinin hover olayı */
     .menu li:hover .submenu {
         display: block;
     }
