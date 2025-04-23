@@ -1,76 +1,90 @@
-// Hamburger Menüsü Toggle
+// Hamburger menüsü için toggle
 document.querySelector('.hamburger').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('open');
 });
 
-// Quick Links API'den veri çekme
-const quickLinksUrl = 'https://run.mocky.io/v3/5bd9dc23-22d8-4eb2-aec9-34ce6ef3629a';
+// Quick Links için API'den veri çekme ve ekleme (Aynı kalıyor)
+const quickLinksApiUrl = 'https://run.mocky.io/v3/5bd9dc23-22d8-4eb2-aec9-34ce6ef3629a';
 
-fetch(quickLinksUrl)
-  .then(response => response.json())
-  .then(data => {
-    const container = document.getElementById('quick-links-container');
+fetch(quickLinksApiUrl)
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById('quick-links-container');
 
-    data.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'quick-card';
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'quick-card';git add . 
 
-      card.innerHTML = `
-        <a href="${item.link}" target="_blank" style="text-decoration: none;">
-          <img src="${item.imageUrl}" alt="${item.title}">
-        </a>
-      `;
+            card.innerHTML = `
+                <a href="${item.link}" target="_blank" style="text-decoration: none;">
+                    <img src="${item.imageUrl}" alt="${item.title}">
+                    <p>${item.title}</p>
+                </a>
+            `;
 
-      container.appendChild(card);
+            container.appendChild(card);
+        });
+    })
+    .catch(error => {
+        console.error('Quick Links verileri çekilemedi:', error);
     });
-  })
-  .catch(error => {
-    console.error('Quick Links verileri çekilemedi:', error);
-  });
 
-// Main Slider API'den veri çekme
-const sliderUrl = 'https://run.mocky.io/v3/080aef8e-ad51-4368-a52f-20b0e8f28b64';
-const sliderContainer = document.getElementById('slider-container');
-let sliderImages = [];
-let currentIndex = 0;
+// Main Slider (Mock API'den veri çekerek)
+let currentSlide = 0;
+let slides = [];
 
-fetch(sliderUrl)
-  .then(response => response.json())
-  .then(data => {
-    sliderImages = data;
-    updateSlider();
-  })
-  .catch(error => {
-    console.error('Slider verileri çekilemedi:', error);
-  });
+const sliderApiUrl = 'https://run.mocky.io/v3/628ba558-328a-477f-a982-0e9d0252bfe8';
 
-function updateSlider() {
-    sliderContainer.innerHTML = '';
+function createSliderFromAPI() {
+    fetch(sliderApiUrl)
+        .then(response => response.json())
+        .then(data => {
+            slides = data;
+            const sliderContainer = document.querySelector('.slider-container');
 
-    sliderImages.forEach((item, index) => {
-        const img = document.createElement('img');
-        img.src = item.imageUrl;
-        img.alt = item.title;
-        if (index !== currentIndex) {
-            img.style.display = 'none';
-        }
-        sliderContainer.appendChild(img);
-    });
+            slides.forEach(item => {
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                slide.style.backgroundImage = `url('${item.imageUrl}')`;
+                slide.style.backgroundSize = 'cover';
+                slide.style.backgroundPosition = 'center';
+
+                sliderContainer.appendChild(slide);
+            });
+
+            showSlide(currentSlide);
+        })
+        .catch(error => {
+            console.error('Slider verileri çekilemedi:', error);
+        });
 }
 
-document.getElementById('prevBtn').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
-    showSlide();
-});
+function showSlide(index) {
+    const sliderContainer = document.querySelector('.slider-container');
+    const slideWidth = sliderContainer.querySelector('.slide')?.clientWidth || 600;
 
-document.getElementById('nextBtn').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % sliderImages.length;
-    showSlide();
-});
+    sliderContainer.style.transform = `translateX(-${index * slideWidth}px)`;
 
-function showSlide() {
-    const images = sliderContainer.querySelectorAll('img');
-    images.forEach((img, idx) => {
-        img.style.display = idx === currentIndex ? 'block' : 'none';
-    });
+    const pagination = document.getElementById('slider-pagination');
+    if (pagination && slides.length > 0) {
+        pagination.textContent = `${index + 1}/${slides.length}`;
+    }
 }
+
+function nextSlide() {
+    if (slides.length === 0) return;
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    if (slides.length === 0) return;
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+document.getElementById('nextBtn').addEventListener('click', nextSlide);
+document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+// Sayfa yüklendiğinde slider'ı başlat
+document.addEventListener('DOMContentLoaded', createSliderFromAPI);
