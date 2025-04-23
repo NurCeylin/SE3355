@@ -26,43 +26,51 @@ fetch(quickLinksApiUrl)
     });
 
 // Elektronik Fırsatlar için API'den veri çekme ve otomatik slider oluşturma
-let electronicsProducts = [];
 let currentProductIndex = 0;
+let productCards = [];
 
 const electronicsApiUrl = 'https://run.mocky.io/v3/ed0a4d2b-dd24-49b4-9a27-c3e1b7fde49f';
-const container = document.getElementById('electronics-deals-container');
 
 fetch(electronicsApiUrl)
     .then(response => response.json())
     .then(data => {
-        electronicsProducts = data;
-
-        electronicsProducts.forEach(item => {
+        const container = document.getElementById('electronics-deals-container');
+        data.forEach(item => {
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
-
             productCard.innerHTML = `
-                <img src="${item.imageUrl}" alt="${item.name}">
-                <h3>${item.name}</h3>
-                <p>Fiyat: ${item.price}</p>
+                <img class="product-image" src="${item.imageUrl}" alt="${item.title}">
+                <h3 class="product-title">${item.title}</h3>
+                <p class="product-price">${item.price}</p>
             `;
-
             container.appendChild(productCard);
+            productCards.push(productCard);
         });
 
-        startProductSlider();
+        // İlk ürün görünür yapalım
+        showProduct(currentProductIndex);
+
+        // 3 saniyede bir ürün değiştir
+        setInterval(() => {
+            currentProductIndex = (currentProductIndex + 1) % productCards.length;
+            showProduct(currentProductIndex);
+        }, 3000); // 3000 ms = 3 saniye
     })
     .catch(error => {
         console.error('Elektronik fırsatlar verileri çekilemedi:', error);
     });
 
-function startProductSlider() {
-    setInterval(() => {
-        currentProductIndex = (currentProductIndex + 1) % electronicsProducts.length;
-        const slideWidth = container.clientWidth;
-        container.style.transform = `translateX(-${currentProductIndex * slideWidth}px)`;
-    }, 3000);
+// Sadece geçerli ürünü göstermek için
+function showProduct(index) {
+    // Tüm ürünleri gizle
+    productCards.forEach(card => {
+        card.classList.remove('visible');
+    });
+
+    // Geçerli ürünü görünür yap
+    productCards[index].classList.add('visible');
 }
+
 
 // Main Slider (Mock API'den veri çekerek)
 let currentSlide = 0;

@@ -165,9 +165,44 @@ body {
 }
 
 /* Elektronik Fırsatlar */
+/* Elektronik Fırsatlar Ürün Kartı */
+.product-card {
+    width: 100%; /* Ekran boyutuna göre adapte olacak şekilde */
+    max-width: 250px; /* Ürün kartlarının genişliğini sınırlıyoruz */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    position: relative; /* Kartlar konumlandırılacak */
+    opacity: 0; /* Başlangıçta tüm kartlar görünmez olacak */
+}
+
+/* Resim Ortalanması ve Boyutlandırma */
+.product-image {
+    width: 90%; /* Resim boyutlarını kart ile uyumlu hale getir */
+    height: auto; /* Yükseklik oranını korur */
+    object-fit: cover; /* Resmin doğru orantıda görünmesini sağlar */
+    border-radius: 8px;
+    margin: 0 auto; /* Ortalar */
+}
+
+/* Elektronik Fırsatlar Ürün Kartının Hover Efekti */
+.product-card:hover {
+    transform: scale(1.05); /* Hover efekti ile biraz büyüme */
+}
+
+/* Görünür Olan Kart */
+.product-card.visible {
+    opacity: 1; /* Sadece bu kart görünür olacak */
+}
+
+/* Elektronik Fırsatlar */
 .electronics-deals {
     width: 600px;
-    height: auto;
+    height: 300px;
     overflow: hidden;
     position: relative;
     margin-left: 20px;
@@ -180,21 +215,25 @@ body {
     width: 100%; /* Genişlik buraya değil, kartlara dağıtılacak */
 }
 
-.product-card {
-    flex: 0 0 100%;
-    max-width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    background-color: #f1f1f1;
-    border-radius: 10px;
+/* Elektronik Fırsatlar Slider Container'ı */
+.electronics-deals-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%; /* Kartlar tek satırda görünmeli */
 }
 
-.product-card img {
-    width: 80%;
-    height: auto;
-    border-radius: 8px;
+/* Resmi Ortada Konumlandır */
+.product-card .product-image {
+    display: block;
+    margin: 0 auto;
 }
+
+/* Diğer Kartları Gizleme */
+.product-card:not(.visible) {
+    display: none;
+}
+
+
 
 /* Quick Links */
 .quick-links {
