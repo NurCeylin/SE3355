@@ -26,8 +26,12 @@ This web application is designed to dynamically display various promotional cont
 - **Electronics Deals API**: Contains information about products on sale in electronics.
 - **Main Slider API**: Supplies background images and titles for the homepage slider.
 - **Recommendations API**: Personalized product suggestions with pricing and ratings.
--
 
+📸 App Screenshots
+💻 Web View
+(images/screenshots/web.jpg)
+📱 Mobile View
+(images/screenshots/mobile.jpg)
 ## Installation
 
 1. Clone the repository:
