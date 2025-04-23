@@ -27,11 +27,16 @@ This web application is designed to dynamically display various promotional cont
 - **Main Slider API**: Supplies background images and titles for the homepage slider.
 - **Recommendations API**: Personalized product suggestions with pricing and ratings.
 
-📸 App Screenshots
-💻 Web View
-(images/screenshots/web.jpg)
-📱 Mobile View
-(images/screenshots/mobile.jpg)
+## 📸 App Screenshots
+
+### 💻 Web View
+
+![Web Preview](images/screenshots/web.jpg)
+
+### 📱 Mobile View
+
+![Mobile Preview](images/screenshots/mobile.jpg)
+
 ## Installation
 
 1. Clone the repository:
