@@ -27,16 +27,6 @@ This web application is designed to dynamically display various promotional cont
 - **Main Slider API**: Supplies background images and titles for the homepage slider.
 - **Recommendations API**: Personalized product suggestions with pricing and ratings.
 
-## 📸 App Screenshots
-
-### 💻 Web View
-
-![Web Preview](https://github.com/NurCeylin/SE3355/blob/main/images/screenshots/web.JPG)
-
-### 📱 Mobile View
-
-![Mobile Preview](https://github.com/NurCeylin/SE3355/blob/main/images/screenshots/mobile.JPG)
-
 ## Installation
 
 1. Clone the repository:
@@ -48,4 +38,15 @@ This web application is designed to dynamically display various promotional cont
     cd your-repo
     ```
 3. Open `index.html` in your browser to view the site.
+
+## 📸 App Screenshots
+
+### 💻 Web View
+
+![Web Preview](https://github.com/NurCeylin/SE3355/blob/main/images/screenshots/web.JPG)
+
+### 📱 Mobile View
+
+![Mobile Preview](https://github.com/NurCeylin/SE3355/blob/main/images/screenshots/mobile.JPG)
+
 
