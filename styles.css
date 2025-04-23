@@ -7,7 +7,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: #ffffff;
 }
 
 /* Navbar */
@@ -20,6 +20,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
 .hamburger {
@@ -29,11 +30,16 @@ body {
     height: 25px;
     width: 30px;
     cursor: pointer;
+    background-color: #e0e0e0;
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 15px;
+    border-left: 1px solid #ddd;
 }
 
 .hamburger span {
     background-color: #333;
-    height: 4px;
+    height: 3px;
     width: 100%;
 }
 
@@ -46,7 +52,7 @@ body {
 
 .menu li {
     position: relative;
-    margin: 0 12px;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,21 +60,21 @@ body {
 
 .menu li a {
     text-decoration: none;
-    color: rgb(121, 121, 121);
+    color: #484848;
     font-size: 13px;
     font-weight: bold;
-    padding: 10px 8px;
+    padding: 10px 15px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 60px;
     line-height: 40px;
     transition: background-color 0.3s ease;
-    border-radius: 4px;
+    border-left: 1px solid #ddd;
 }
 
 .menu li a:hover {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .submenu {
@@ -79,166 +85,325 @@ body {
     background-color: #fff;
     list-style: none;
     padding: 10px 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     min-width: 180px;
+    z-index: 100;
 }
 
 .menu li:hover .submenu {
     display: block;
 }
 
+.submenu li {
+    margin: 0;
+    width: 100%;
+    display: block;
+}
+
 .submenu li a {
-    padding: 10px 15px;
+    padding: 8px 15px;
     display: block;
     font-size: 13px;
-    color: rgb(121, 121, 121);
+    color: #484848;
     background-color: #fff;
     transition: background-color 0.3s, color 0.3s;
+    height: auto;
+    line-height: 1.4;
+    text-align: left;
+    justify-content: flex-start;
+    border-left: none;
 }
 
 .submenu li a:hover {
-    background-color: #ff5e00;
+    background-color: #ff6000;
     color: #fff;
 }
 
 /* Ana slider ve elektronik fırsatlar yanyana */
 .main-slider-wrapper {
     display: flex;
+    justify-content: center;
     gap: 20px;
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
     flex-wrap: wrap;
+    background-color: #ffffff;
 }
 
 /* Ana Slider */
 .main-slider {
-    padding: 20px;
-    width: 600px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 650px;
+    height: 320px;
     overflow: hidden;
     position: relative;
-    border-radius: 10px;
+    border-radius: 12px;
     background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .slider-container {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    height: 100%;
 }
 
 .slide {
-    min-width: 600px;
-    height: 250px;
-    border-radius: 10px;
+    min-width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    z-index: 1;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    color: #fff;
+    z-index: 2;
+}
+
+.slide-content h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.slide-content p {
+    font-size: 14px;
+    opacity: 0.9;
 }
 
 .slider-pagination {
     position: absolute;
-    bottom: 10px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 5px 10px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 3;
 }
 
 .slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(255,255,255,0.3);
     color: white;
     border: none;
-    font-size: 24px;
-    padding: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
     cursor: pointer;
     z-index: 2;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.slider-btn:hover {
+    background-color: rgba(255,255,255,0.5);
 }
 
 #prevBtn {
-    left: 10px;
+    left: 15px;
 }
 
 #nextBtn {
-    right: 10px;
-}
-
-/* Elektronik Fırsatlar */
-/* Elektronik Fırsatlar Ürün Kartı */
-.product-card {
-    width: 100%; /* Ekran boyutuna göre adapte olacak şekilde */
-    max-width: 250px; /* Ürün kartlarının genişliğini sınırlıyoruz */
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    position: relative; /* Kartlar konumlandırılacak */
-    opacity: 0; /* Başlangıçta tüm kartlar görünmez olacak */
-}
-
-/* Resim Ortalanması ve Boyutlandırma */
-.product-image {
-    width: 90%; /* Resim boyutlarını kart ile uyumlu hale getir */
-    height: auto; /* Yükseklik oranını korur */
-    object-fit: cover; /* Resmin doğru orantıda görünmesini sağlar */
-    border-radius: 8px;
-    margin: 0 auto; /* Ortalar */
-}
-
-/* Elektronik Fırsatlar Ürün Kartının Hover Efekti */
-.product-card:hover {
-    transform: scale(1.05); /* Hover efekti ile biraz büyüme */
-}
-
-/* Görünür Olan Kart */
-.product-card.visible {
-    opacity: 1; /* Sadece bu kart görünür olacak */
+    right: 15px;
 }
 
 /* Elektronik Fırsatlar */
 .electronics-deals {
-    width: 600px;
-    height: 300px;
-    overflow: hidden;
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    height: 320px;
     position: relative;
-    margin-left: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #ff6000, #f90);
+    padding: 15px;
+}
+
+.electronics-deals::before {
+    content: 'Elektronik Fırsatlar';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    z-index: 10;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.electronics-deals-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.product-card {
+    width: 100%;
+    height: 260px;
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
-}
-
-.electronics-deals-container {
-    display: flex;
-    transition: transform 1s ease-in-out;
-    width: 100%; /* Genişlik buraya değil, kartlara dağıtılacak */
-}
-
-/* Elektronik Fırsatlar Slider Container'ı */
-.electronics-deals-container {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 100%; /* Kartlar tek satırda görünmeli */
-}
-
-/* Resmi Ortada Konumlandır */
-.product-card .product-image {
-    display: block;
-    margin: 0 auto;
-}
-
-/* Diğer Kartları Gizleme */
-.product-card:not(.visible) {
+    padding: 15px;
+    text-align: center;
     display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: scale(0.95);
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
+.product-card.visible {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+}
 
+.product-image {
+    max-width: 100%;
+    height: 160px;
+    object-fit: contain;
+    margin: 0 auto 10px;
+}
+
+.product-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 10px 0;
+    line-height: 1.3;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6000;
+    margin-top: auto;
+}
+
+/* Sana Özel Öneriler */
+.special-recommendations {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff;
+}
+
+.special-recommendations h2 {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    border-left: 4px solid #ff6000;
+}
+
+.special-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.special-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.special-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.special-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    transition: transform 0.3s;
+}
+
+.special-card:hover img {
+    transform: scale(1.05);
+}
+
+.special-card h3 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #484848;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    height: 40px;
+    overflow: hidden;
+}
+
+.special-card .price {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ff6000;
+    margin: 5px 0;
+}
+
+.special-card .rating {
+    color: #faaf00;
+    font-size: 14px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.special-card .rating .stars {
+    display: inline-flex;
+    margin-right: 5px;
+}
+
+.special-card .rating .review-count {
+    color: #999;
+    font-size: 12px;
+}
 
 /* Quick Links */
 .quick-links {
-    padding: 40px 20px;
-    background-color: white;
+    padding: 20px;
+    background-color: #ffffff;
     text-align: center;
 }
 
@@ -275,48 +440,219 @@ body {
     transform: translateY(-5px);
 }
 
-@media (max-width: 768px) {
-    .quick-links-container {
-        grid-template-columns: repeat(5, 1fr);
-    }
+/* Responsive Tasarım Geliştirmeleri */
 
+/* Tablet için */
+@media (max-width: 992px) {
+    .main-slider-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main-slider, .electronics-deals {
+        min-width: 90%;
+        max-width: 90%;
+        margin: 10px 0;
+    }
+    
+    .menu li a {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+    
+    .special-cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+/* Mobil için */
+@media (max-width: 768px) {
     .hamburger {
         display: flex;
     }
-
+    
     .menu {
         display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #f1f1f1;
         position: absolute;
         top: 60px;
         left: 0;
-        padding: 10px;
+        width: 100%;
+        flex-direction: column;
+        background-color: #f1f1f1;
+        padding: 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
-
+    
     .menu.open {
         display: flex;
     }
-
-    .submenu {
-        display: none;
-    }
-
-    .menu li:hover .submenu {
-        display: block;
-    }
-
-    .main-slider-wrapper {
-        flex-direction: column;
-    }
-
-    .main-slider, .electronics-deals {
+    
+    .menu li {
         width: 100%;
         margin: 0;
     }
-
-    .slide {
+    
+    .menu li a {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        justify-content: flex-start;
+        border-left: none;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .submenu {
+        position: static;
+        box-shadow: none;
+        width: 100%;
+        display: none;
+        padding: 0;
+    }
+    
+    .menu li:hover .submenu {
+        display: none;
+    }
+    
+    .menu li.active .submenu {
+        display: block;
+    }
+    
+    /* Ana slider ve elektronik fırsatlar yanyana */
+    .main-slider-wrapper {
+        padding: 10px;
+    }
+    
+    /* Ana Slider */
+    .main-slider {
         min-width: 100%;
+        max-width: 100%;
+        height: 200px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+    
+    .slide {
+        height: 200px;
+    }
+    
+    .slide-content {
+        padding: 10px 15px;
+    }
+    
+    .slide-content h2 {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+    
+    .slide-content p {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+    
+    .slider-pagination {
+        bottom: 8px;
+        right: 8px;
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+    
+    .slider-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+    
+    #prevBtn {
+        left: 8px;
+    }
+    
+    #nextBtn {
+        right: 8px;
+    }
+    
+    /* Elektronik Fırsatlar - mobil için */
+    .electronics-deals {
+        min-width: 100%;
+        max-width: 100%;
+        height: 280px;
+        margin-left: 0;
+    }
+    
+    .electronics-deals::before {
+        font-size: 16px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .product-card {
+        height: 220px;
+        margin-top: 25px;
+    }
+    
+    .product-image {
+        height: 120px;
+    }
+    
+    .product-title {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+    
+    .product-price {
+        font-size: 16px;
+    }
+    
+    .special-cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+    
+    .special-card {
+        padding: 10px;
+    }
+    
+    .special-card img {
+        height: 120px;
+    }
+    
+    .quick-links-container {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}
+
+/* Çok küçük ekranlar için */
+@media (max-width: 480px) {
+    .main-slider {
+        height: 180px;
+    }
+    
+    .slide {
+        height: 180px;
+    }
+    
+    .slide-content h2 {
+        font-size: 14px;
+    }
+    
+    .slide-content p {
+        font-size: 11px;
+    }
+    
+    .electronics-deals {
+        height: 250px;
+    }
+    
+    .product-card {
+        height: 200px;
+        padding: 10px;
+    }
+    
+    .product-image {
+        height: 100px;
+    }
+    
+    .special-cards-container {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

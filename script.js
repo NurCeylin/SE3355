@@ -71,7 +71,7 @@ function showProduct(index) {
 let currentSlide = 0;
 let slides = [];
 
-const sliderApiUrl = 'https://run.mocky.io/v3/628ba558-328a-477f-a982-0e9d0252bfe8';
+const sliderApiUrl = 'https://run.mocky.io/v3/b9bffda4-2235-4033-b0d4-218b41c4b624';
 
 function createSliderFromAPI() {
     fetch(sliderApiUrl)
@@ -86,11 +86,21 @@ function createSliderFromAPI() {
                 slide.style.backgroundImage = `url('${item.imageUrl}')`;
                 slide.style.backgroundSize = 'cover';
                 slide.style.backgroundPosition = 'center';
-
+                
+                // Add slide content with title from API
+                const slideContent = document.createElement('div');
+                slideContent.className = 'slide-content';
+                slideContent.innerHTML = `
+                    <h2>${item.title}</h2>
+                    <p>Sınırlı süre için geçerli fırsatları kaçırma!</p>
+                `;
+                
+                slide.appendChild(slideContent);
                 sliderContainer.appendChild(slide);
             });
 
             showSlide(currentSlide);
+            // Otomatik slider kaldırıldı - 1. slider için otomatik dönme istenmiyor
         })
         .catch(error => {
             console.error('Slider verileri çekilemedi:', error);
@@ -123,33 +133,49 @@ function prevSlide() {
 document.getElementById('nextBtn').addEventListener('click', nextSlide);
 document.getElementById('prevBtn').addEventListener('click', prevSlide);
 
+// Sana Özel Öneriler - API'den veri çekme
 document.addEventListener('DOMContentLoaded', () => {
     createSliderFromAPI();
-
-    // Sana Özel Öneriler - API'den veri çekme
+    
     fetch("https://run.mocky.io/v3/b9cc2fb8-28a7-4d9b-8eda-c7a5e2c38ad0")
-        .then(response => response.json())
-        .then(data => {
-            const container = document.getElementById("special-recommendations");
-            data.slice(0, 5).forEach(product => {
-                const col = document.createElement("div");
-                col.className = "col-6 col-md-4 col-lg-3 mb-4";
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById("recommendations-container");
 
-                col.innerHTML = `
-                    <div class="card h-100 shadow-sm border-0">
-                      <img src="${product.image}" class="card-img-top img-fluid p-3" alt="${product.name}" style="height: 200px; object-fit: contain;">
-                      <div class="card-body">
-                        <h6 class="card-title">${product.name}</h6>
-                        <p class="card-text fw-bold text-danger">${product.price} TL</p>
-                        <p class="card-text text-warning mb-0">⭐ ${product.rating}</p>
-                      </div>
-                    </div>
-                `;
-
-                container.appendChild(col);
-            });
-        })
-        .catch(error => {
-            console.error("Sana özel öneriler verisi çekilemedi:", error);
+        data.forEach(product => {
+            // Yıldız rating'i oluştur
+            const ratingStars = Array(5).fill('').map((_, i) => {
+                return i < Math.floor(product.rating) ? '★' : '☆';
+            }).join('');
+            
+            const card = document.createElement("div");
+            card.classList.add("special-card");
+            card.innerHTML = `
+                <img src="${product.imageUrl}" alt="${product.title}">
+                <h3>${product.title}</h3>
+                <div class="price">${product.price} TL</div>
+                <div class="rating">
+                    <span class="stars">${ratingStars}</span>
+                </div>
+            `;
+            container.appendChild(card);
         });
+    })
+    .catch(err => console.error("Veri çekme hatası:", err));
+
+    // Mobil cihazlarda alt menü açılışı için
+    if (window.innerWidth <= 768) {
+        const menuItems = document.querySelectorAll('.menu > li');
+        menuItems.forEach(item => {
+            if (item.querySelector('.submenu')) {
+                item.addEventListener('click', function(e) {
+                    // Eğer tıklanan öğe bağlantı değilse
+                    if (e.target === this || e.target === this.querySelector('a')) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                });
+            }
+        });
+    }
 });
