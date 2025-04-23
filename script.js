@@ -54,23 +54,18 @@ fetch(electronicsApiUrl)
         setInterval(() => {
             currentProductIndex = (currentProductIndex + 1) % productCards.length;
             showProduct(currentProductIndex);
-        }, 3000); // 3000 ms = 3 saniye
+        }, 3000);
     })
     .catch(error => {
         console.error('Elektronik fırsatlar verileri çekilemedi:', error);
     });
 
-// Sadece geçerli ürünü göstermek için
 function showProduct(index) {
-    // Tüm ürünleri gizle
     productCards.forEach(card => {
         card.classList.remove('visible');
     });
-
-    // Geçerli ürünü görünür yap
     productCards[index].classList.add('visible');
 }
-
 
 // Main Slider (Mock API'den veri çekerek)
 let currentSlide = 0;
@@ -105,7 +100,6 @@ function createSliderFromAPI() {
 function showSlide(index) {
     const sliderContainer = document.querySelector('.slider-container');
     const slideWidth = sliderContainer.querySelector('.slide')?.clientWidth || 600;
-
     sliderContainer.style.transform = `translateX(-${index * slideWidth}px)`;
 
     const pagination = document.getElementById('slider-pagination');
@@ -129,5 +123,33 @@ function prevSlide() {
 document.getElementById('nextBtn').addEventListener('click', nextSlide);
 document.getElementById('prevBtn').addEventListener('click', prevSlide);
 
-// Sayfa yüklendiğinde slider'ı başlat
-document.addEventListener('DOMContentLoaded', createSliderFromAPI);
+document.addEventListener('DOMContentLoaded', () => {
+    createSliderFromAPI();
+
+    // Sana Özel Öneriler - API'den veri çekme
+    fetch("https://run.mocky.io/v3/b9cc2fb8-28a7-4d9b-8eda-c7a5e2c38ad0")
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("special-recommendations");
+            data.slice(0, 5).forEach(product => {
+                const col = document.createElement("div");
+                col.className = "col-6 col-md-4 col-lg-3 mb-4";
+
+                col.innerHTML = `
+                    <div class="card h-100 shadow-sm border-0">
+                      <img src="${product.image}" class="card-img-top img-fluid p-3" alt="${product.name}" style="height: 200px; object-fit: contain;">
+                      <div class="card-body">
+                        <h6 class="card-title">${product.name}</h6>
+                        <p class="card-text fw-bold text-danger">${product.price} TL</p>
+                        <p class="card-text text-warning mb-0">⭐ ${product.rating}</p>
+                      </div>
+                    </div>
+                `;
+
+                container.appendChild(col);
+            });
+        })
+        .catch(error => {
+            console.error("Sana özel öneriler verisi çekilemedi:", error);
+        });
+});
