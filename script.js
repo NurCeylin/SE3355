@@ -13,12 +13,11 @@ fetch(quickLinksApiUrl)
 
         data.forEach(item => {
             const card = document.createElement('div');
-            card.className = 'quick-card';git add . 
+            card.className = 'quick-card';
 
             card.innerHTML = `
-                <a href="${item.link}" target="_blank" style="text-decoration: none;">
+                <a href="${item.link}" target="_blank">
                     <img src="${item.imageUrl}" alt="${item.title}">
-                    <p>${item.title}</p>
                 </a>
             `;
 
