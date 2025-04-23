@@ -31,11 +31,11 @@ This web application is designed to dynamically display various promotional cont
 
 ### 💻 Web View
 
-![Web Preview](https://github.com/NurCeylin/SE3355/tree/main/images/screenshots/web.jpg)
+![Web Preview](https://github.com/NurCeylin/SE3355/blob/main/images/screenshots/web.JPG)
 
 ### 📱 Mobile View
 
-![Mobile Preview](images/screenshots/mobile.jpg)
+![Mobile Preview](https://github.com/NurCeylin/SE3355/blob/main/images/screenshots/mobile.JPG)
 
 ## Installation
 
