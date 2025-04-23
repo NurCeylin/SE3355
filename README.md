@@ -31,7 +31,7 @@ This web application is designed to dynamically display various promotional cont
 
 ### 💻 Web View
 
-![Web Preview](images/screenshots/web.jpg)
+![Web Preview](https://github.com/NurCeylin/SE3355/tree/main/images/screenshots/web.jpg)
 
 ### 📱 Mobile View
 
