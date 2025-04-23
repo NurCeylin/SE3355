@@ -1,11 +1,13 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: Arial, sans-serif;
-    background-color: white; /* Arka plan beyaz */
+    background-color: white;
 }
 
 /* Navbar */
@@ -20,7 +22,6 @@ body {
     justify-content: center;
 }
 
-/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -36,7 +37,6 @@ body {
     width: 100%;
 }
 
-/* Menü */
 .menu {
     list-style: none;
     display: flex;
@@ -101,31 +101,36 @@ body {
     color: #fff;
 }
 
-/* Main Slider */
-.main-slider {
-    margin-top: 40px;
+/* Ana slider ve elektronik fırsatlar yanyana */
+.main-slider-wrapper {
+    display: flex;
+    gap: 20px;
     padding: 20px;
-    width: 600px; /* Daha küçük boyut */
+    flex-wrap: wrap;
+}
+
+/* Ana Slider */
+.main-slider {
+    padding: 20px;
+    width: 600px;
     overflow: hidden;
     position: relative;
     border-radius: 10px;
-    margin-left: 20px; /* Sola dayalı */
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Slider Container */
 .slider-container {
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
 
-/* Tek Tek Slide Alanları */
 .slide {
     min-width: 600px;
     height: 250px;
     border-radius: 10px;
 }
 
-/* Slider Pagination */
 .slider-pagination {
     position: absolute;
     bottom: 10px;
@@ -137,7 +142,6 @@ body {
     font-size: 14px;
 }
 
-/* Slider Butonları */
 .slider-btn {
     position: absolute;
     top: 50%;
@@ -158,6 +162,38 @@ body {
 
 #nextBtn {
     right: 10px;
+}
+
+/* Elektronik Fırsatlar */
+.electronics-deals {
+    width: 600px;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.electronics-deals-container {
+    display: flex;
+    transition: transform 1s ease-in-out;
+    width: 100%; /* Genişlik buraya değil, kartlara dağıtılacak */
+}
+
+.product-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
+
+.product-card img {
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
 }
 
 /* Quick Links */
@@ -200,7 +236,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* Mobil */
 @media (max-width: 768px) {
     .quick-links-container {
         grid-template-columns: repeat(5, 1fr);
@@ -231,5 +266,18 @@ body {
 
     .menu li:hover .submenu {
         display: block;
+    }
+
+    .main-slider-wrapper {
+        flex-direction: column;
+    }
+
+    .main-slider, .electronics-deals {
+        width: 100%;
+        margin: 0;
+    }
+
+    .slide {
+        min-width: 100%;
     }
 }

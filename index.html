@@ -99,14 +99,24 @@
         </div>
     </section>
 
-    <section class="main-slider">
-        <button id="prevBtn" class="slider-btn">←</button>
-        <div class="slider-container">
-            <!-- Slider içerikleri buraya dinamik olarak eklenecek -->
+    <!-- Ana Slider ve Elektronik Fırsatlar Yan Yana -->
+    <section class="main-slider-wrapper">
+        <!-- Ana Slider -->
+        <div class="main-slider">
+            <button id="prevBtn" class="slider-btn">←</button>
+            <div class="slider-container" id="main-slider-container">
+                <!-- Ana slider içerikleri JS ile buraya eklenecek -->
+            </div>
+            <button id="nextBtn" class="slider-btn">→</button>
+            <div class="slider-pagination" id="slider-pagination">1/10</div>
         </div>
-        <button id="nextBtn" class="slider-btn">→</button>
-    
-        <div class="slider-pagination" id="slider-pagination">1/10</div>
+
+        <!-- Elektronik Fırsatlar -->
+        <div class="electronics-deals">
+            <div class="electronics-deals-container" id="electronics-deals-container">
+                <!-- JS ile kartlar buraya eklenecek -->
+            </div>
+        </div>
     </section>
 
     <!-- Script -->

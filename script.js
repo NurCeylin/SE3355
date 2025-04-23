@@ -3,14 +3,12 @@ document.querySelector('.hamburger').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('open');
 });
 
-// Quick Links için API'den veri çekme ve ekleme (Aynı kalıyor)
+// Quick Links için API'den veri çekme ve ekleme
 const quickLinksApiUrl = 'https://run.mocky.io/v3/5bd9dc23-22d8-4eb2-aec9-34ce6ef3629a';
-
 fetch(quickLinksApiUrl)
     .then(response => response.json())
     .then(data => {
         const container = document.getElementById('quick-links-container');
-
         data.forEach(item => {
             const card = document.createElement('div');
             card.className = 'quick-card';
@@ -20,13 +18,51 @@ fetch(quickLinksApiUrl)
                     <img src="${item.imageUrl}" alt="${item.title}">
                 </a>
             `;
-
             container.appendChild(card);
         });
     })
     .catch(error => {
         console.error('Quick Links verileri çekilemedi:', error);
     });
+
+// Elektronik Fırsatlar için API'den veri çekme ve otomatik slider oluşturma
+let electronicsProducts = [];
+let currentProductIndex = 0;
+
+const electronicsApiUrl = 'https://run.mocky.io/v3/ed0a4d2b-dd24-49b4-9a27-c3e1b7fde49f';
+const container = document.getElementById('electronics-deals-container');
+
+fetch(electronicsApiUrl)
+    .then(response => response.json())
+    .then(data => {
+        electronicsProducts = data;
+
+        electronicsProducts.forEach(item => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+
+            productCard.innerHTML = `
+                <img src="${item.imageUrl}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>Fiyat: ${item.price}</p>
+            `;
+
+            container.appendChild(productCard);
+        });
+
+        startProductSlider();
+    })
+    .catch(error => {
+        console.error('Elektronik fırsatlar verileri çekilemedi:', error);
+    });
+
+function startProductSlider() {
+    setInterval(() => {
+        currentProductIndex = (currentProductIndex + 1) % electronicsProducts.length;
+        const slideWidth = container.clientWidth;
+        container.style.transform = `translateX(-${currentProductIndex * slideWidth}px)`;
+    }, 3000);
+}
 
 // Main Slider (Mock API'den veri çekerek)
 let currentSlide = 0;
