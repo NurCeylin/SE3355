@@ -84,6 +84,7 @@ function createSliderFromAPI() {
                 slide.style.backgroundSize = 'cover';
                 slide.style.backgroundPosition = 'center';
                 
+          
                 const slideContent = document.createElement('div');
                 slideContent.className = 'slide-content';
                 slideContent.innerHTML = `
@@ -96,6 +97,7 @@ function createSliderFromAPI() {
             });
 
             showSlide(currentSlide);
+          
         })
         .catch(error => {
             console.error('Slider verileri çekilemedi:', error);
@@ -128,7 +130,7 @@ function prevSlide() {
 document.getElementById('nextBtn').addEventListener('click', nextSlide);
 document.getElementById('prevBtn').addEventListener('click', prevSlide);
 
-// Sana Özel Öneriler - API'den veri çekme
+// Sana Özel Öneriler için API
 document.addEventListener('DOMContentLoaded', () => {
     createSliderFromAPI();
     
@@ -138,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById("recommendations-container");
 
         data.forEach(product => {
+        
             const ratingStars = Array(5).fill('').map((_, i) => {
                 return i < Math.floor(product.rating) ? '★' : '☆';
             }).join('');
@@ -157,12 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error("Veri çekme hatası:", err));
 
+
     if (window.innerWidth <= 768) {
         const menuItems = document.querySelectorAll('.menu > li');
         menuItems.forEach(item => {
             if (item.querySelector('.submenu')) {
                 item.addEventListener('click', function(e) {
-                    // Eğer tıklanan öğe bağlantı değilse
                     if (e.target === this || e.target === this.querySelector('a')) {
                         e.preventDefault();
                         this.classList.toggle('active');
