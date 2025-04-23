@@ -1,9 +1,8 @@
-// Hamburger menüsü için toggle
 document.querySelector('.hamburger').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('open');
 });
 
-// Quick Links için API'den veri çekme ve ekleme
+// Quick Links için API
 const quickLinksApiUrl = 'https://run.mocky.io/v3/5bd9dc23-22d8-4eb2-aec9-34ce6ef3629a';
 fetch(quickLinksApiUrl)
     .then(response => response.json())
@@ -25,7 +24,7 @@ fetch(quickLinksApiUrl)
         console.error('Quick Links verileri çekilemedi:', error);
     });
 
-// Elektronik Fırsatlar için API'den veri çekme ve otomatik slider oluşturma
+// Elektronik Fırsatlar için API
 let currentProductIndex = 0;
 let productCards = [];
 
@@ -47,10 +46,8 @@ fetch(electronicsApiUrl)
             productCards.push(productCard);
         });
 
-        // İlk ürün görünür yapalım
         showProduct(currentProductIndex);
 
-        // 3 saniyede bir ürün değiştir
         setInterval(() => {
             currentProductIndex = (currentProductIndex + 1) % productCards.length;
             showProduct(currentProductIndex);
@@ -67,7 +64,7 @@ function showProduct(index) {
     productCards[index].classList.add('visible');
 }
 
-// Main Slider (Mock API'den veri çekerek)
+// Main Slider için API
 let currentSlide = 0;
 let slides = [];
 
@@ -87,7 +84,6 @@ function createSliderFromAPI() {
                 slide.style.backgroundSize = 'cover';
                 slide.style.backgroundPosition = 'center';
                 
-                // Add slide content with title from API
                 const slideContent = document.createElement('div');
                 slideContent.className = 'slide-content';
                 slideContent.innerHTML = `
@@ -100,7 +96,6 @@ function createSliderFromAPI() {
             });
 
             showSlide(currentSlide);
-            // Otomatik slider kaldırıldı - 1. slider için otomatik dönme istenmiyor
         })
         .catch(error => {
             console.error('Slider verileri çekilemedi:', error);
@@ -143,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById("recommendations-container");
 
         data.forEach(product => {
-            // Yıldız rating'i oluştur
             const ratingStars = Array(5).fill('').map((_, i) => {
                 return i < Math.floor(product.rating) ? '★' : '☆';
             }).join('');
@@ -163,7 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error("Veri çekme hatası:", err));
 
-    // Mobil cihazlarda alt menü açılışı için
     if (window.innerWidth <= 768) {
         const menuItems = document.querySelectorAll('.menu > li');
         menuItems.forEach(item => {
